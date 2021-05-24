@@ -2,7 +2,7 @@ pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-import "./CakeToken.sol";
+import "./TaalToken.sol";
 
 // SyrupBar with Governance.
 contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
@@ -18,22 +18,22 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
     }
 
     // The CAKE TOKEN!
-    CakeToken public cake;
+    TaalToken public taal;
 
 
     constructor(
-        CakeToken _cake
+        TaalToken _taal
     ) public {
-        cake = _cake;
+        taal = _taal;
     }
 
-    // Safe cake transfer function, just in case if rounding error causes pool to not have enough CAKEs.
-    function safeCakeTransfer(address _to, uint256 _amount) public onlyOwner {
-        uint256 cakeBal = cake.balanceOf(address(this));
-        if (_amount > cakeBal) {
-            cake.transfer(_to, cakeBal);
+    // Safe taal transfer function, just in case if rounding error causes pool to not have enough CAKEs.
+    function safeTaalTransfer(address _to, uint256 _amount) public onlyOwner {
+        uint256 taalBal = taal.balanceOf(address(this));
+        if (_amount > taalBal) {
+            taal.transfer(_to, taalBal);
         } else {
-            cake.transfer(_to, _amount);
+            taal.transfer(_to, _amount);
         }
     }
 
