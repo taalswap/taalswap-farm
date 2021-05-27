@@ -166,6 +166,11 @@ contract MasterChef is Ownable {
         migrator = _migrator;
     }
 
+    // Set the taalPerBlock. Can only be called by the owner.
+    function setTaalPerBlock(uint256 _taalPerBlock) public onlyOwner {
+        taalPerBlock = _taalPerBlock;
+    }
+
     // Migrate lp token to another lp contract. Can be called by anyone. We trust that migrator contract is good.
     function migrate(uint256 _pid) public {
         require(address(migrator) != address(0), "migrate: no migrator");
