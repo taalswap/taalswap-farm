@@ -192,6 +192,8 @@ library SafeMath {
 
 // File: @pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol
 
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 pragma solidity >=0.4.0;
 
 interface IBEP20 {
@@ -290,6 +292,8 @@ interface IBEP20 {
 }
 
 // File: @pancakeswap/pancake-swap-lib/contracts/utils/Address.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.2;
 
@@ -453,6 +457,8 @@ library Address {
 
 // File: @pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol
 
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.6.0;
 
 
@@ -554,6 +560,8 @@ library SafeBEP20 {
 
 // File: @pancakeswap/pancake-swap-lib/contracts/GSN/Context.sol
 
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 pragma solidity >=0.4.0;
 
 /*
@@ -582,6 +590,8 @@ contract Context {
 }
 
 // File: @pancakeswap/pancake-swap-lib/contracts/access/Ownable.sol
+
+// SPDX-License-Identifier: GPL-3.0-or-later
 
 pragma solidity >=0.4.0;
 
@@ -660,6 +670,8 @@ contract Ownable is Context {
 }
 
 // File: @pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.4.0;
 
@@ -1658,6 +1670,11 @@ contract MasterChef is Ownable {
     // Set the migrator contract. Can only be called by the owner.
     function setMigrator(IMigratorChef _migrator) public onlyOwner {
         migrator = _migrator;
+    }
+
+    // Set the taalPerBlock. Can only be called by the owner.
+    function setTaalPerBlock(uint256 _taalPerBlock) public onlyOwner {
+        taalPerBlock = _taalPerBlock;
     }
 
     // Migrate lp token to another lp contract. Can be called by anyone. We trust that migrator contract is good.
