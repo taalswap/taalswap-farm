@@ -16,11 +16,11 @@ contract TaalVault is Ownable, Pausable {
     struct UserInfo {
         uint256 shares; // number of shares for a user
         uint256 lastDepositedTime; // keeps track of deposited time for potential penalty
-        uint256 cakeAtLastUserAction; // keeps track of cake deposited at the last user action
+        uint256 taalAtLastUserAction; // keeps track of TAL deposited at the last user action
         uint256 lastUserActionTime; // keeps track of the last user action time
     }
 
-    IERC20 public immutable token; // Cake token
+    IERC20 public immutable token; // TAL token
     IERC20 public immutable receiptToken; // Syrup token
 
     IMasterChef public immutable masterchef;
@@ -50,7 +50,7 @@ contract TaalVault is Ownable, Pausable {
 
     /**
      * @notice Constructor
-     * @param _token: Cake token contract
+     * @param _token: TAL token contract
      * @param _receiptToken: Syrup token contract
      * @param _masterchef: MasterChef contract
      * @param _admin: address of the admin
@@ -91,9 +91,9 @@ contract TaalVault is Ownable, Pausable {
     }
 
     /**
-     * @notice Deposits funds into the Cake Vault
+     * @notice Deposits funds into the Taal Vault
      * @dev Only possible when contract not paused.
-     * @param _amount: number of tokens to deposit (in CAKE)
+     * @param _amount: number of tokens to deposit (in TAL)
      */
     function deposit(uint256 _amount) external whenNotPaused notContract {
         require(_amount > 0, "Nothing to deposit");
@@ -113,7 +113,7 @@ contract TaalVault is Ownable, Pausable {
 
         totalShares = totalShares.add(currentShares);
 
-        user.cakeAtLastUserAction = user.shares.mul(balanceOf()).div(totalShares);
+        user.taalAtLastUserAction = user.shares.mul(balanceOf()).div(totalShares);
         user.lastUserActionTime = block.timestamp;
 
         _earn();
@@ -129,7 +129,7 @@ contract TaalVault is Ownable, Pausable {
     }
 
     /**
-     * @notice Reinvests CAKE tokens into MasterChef
+     * @notice Reinvests TAL tokens into MasterChef
      * @dev Only possible when contract not paused.
      */
     function harvest() external notContract whenNotPaused {
@@ -215,7 +215,7 @@ contract TaalVault is Ownable, Pausable {
     }
 
     /**
-     * @notice Withdraw unexpected tokens sent to the Cake Vault
+     * @notice Withdraw unexpected tokens sent to the Taal Vault
      */
     function inCaseTokensGetStuck(address _token) external onlyAdmin {
         require(_token != address(token), "Token cannot be same as deposit token");
@@ -245,7 +245,7 @@ contract TaalVault is Ownable, Pausable {
 
     /**
      * @notice Calculates the expected harvest reward from third party
-     * @return Expected reward to collect in CAKE
+     * @return Expected reward to collect in TAL
      */
     function calculateHarvestCakeRewards() external view returns (uint256) {
         uint256 amount = IMasterChef(masterchef).pendingTaal(0, address(this));
@@ -257,7 +257,7 @@ contract TaalVault is Ownable, Pausable {
 
     /**
      * @notice Calculates the total pending rewards that can be restaked
-     * @return Returns total pending cake rewards
+     * @return Returns total pending TAL rewards
      */
     function calculateTotalPendingCakeRewards() external view returns (uint256) {
         uint256 amount = IMasterChef(masterchef).pendingTaal(0, address(this));
@@ -274,7 +274,7 @@ contract TaalVault is Ownable, Pausable {
     }
 
     /**
-     * @notice Withdraws from funds from the Cake Vault
+     * @notice Withdraws from funds from the Taal Vault
      * @param _shares: Number of shares to withdraw
      */
     function withdraw(uint256 _shares) public notContract {
@@ -304,9 +304,9 @@ contract TaalVault is Ownable, Pausable {
         }
 
         if (user.shares > 0) {
-            user.cakeAtLastUserAction = user.shares.mul(balanceOf()).div(totalShares);
+            user.taalAtLastUserAction = user.shares.mul(balanceOf()).div(totalShares);
         } else {
-            user.cakeAtLastUserAction = 0;
+            user.taalAtLastUserAction = 0;
         }
 
         user.lastUserActionTime = block.timestamp;

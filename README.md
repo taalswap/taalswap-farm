@@ -1,17 +1,14 @@
 # TaalSwap Farming
 
-[![Actions Status](https://github.com/pancakeswap/pancake-farm/workflows/CI/badge.svg)](https://github.com/pancakeswap/pancake-farm/actions)
-[![codecov](https://codecov.io/gh/pancakeswap/pancake-farm/branch/master/graph/badge.svg?token=5XMLP74IR0)](https://codecov.io/gh/pancakeswap/pancake-farm)
-
 https://taalswap.finance. Feel free to read the code. More details coming soon.
 
 ## Deployed Contracts / Hash
 
-### BSCMAINNET
+### RINKEBY
 
-- CakeToken - https://bscscan.com/token/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82
-- MasterChef - https://bscscan.com/address/0x73feaa1eE314F8c655E354234017bE2193C9E24E
-- (Uni|Cake)swapV2Factory - https://bscscan.com/address/0xBCfCcbde45cE874adCB698cC183deBcF17952812
-- (Uni|Cake)swapV2Router02 - https://bscscan.com/address/0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F
-- (Uni|Cake)swapV2Pair init code hash - `0xd0d4c4cd0848c93cb4fd1f498d7013ee6bfb25783ea21593d5834f5d250ece66`
-- MultiCall - 0xE1dDc30f691CA671518090931e3bFC1184BFa4Aa
+- TaalToken - https://rinkeby.etherscan.io/address/0xe18e460d38441027b6672363d68c9088f3d773bf
+- MasterChef - https://rinkeby.etherscan.io/address/0x37d9a669338ad2f9e5ae553017cd03d423b03b59
+- TaalFactory - https://rinkeby.etherscan.io/address/0x8bcaece1041decc4704dcc07cab9f00f745b07ba
+- TaalRouter - https://rinkeby.etherscan.io/address/0x04d17f2606ce80af3cf886724a7c2755aa3d9743
+- TaalPair init code hash - `0x74eaa4fc54052df469bf0dbd58079c41131eb36479bc8a5bfe15a68405120d3b`
+- MultiCall - 0x9B1265E5a12DED869CBe1934828aCe8388FA1362

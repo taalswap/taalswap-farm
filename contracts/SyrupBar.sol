@@ -20,7 +20,6 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
     // The CAKE TOKEN!
     TaalToken public taal;
 
-
     constructor(
         TaalToken _taal
     ) public {

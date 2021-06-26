@@ -42,7 +42,7 @@ contract EthStaking is Ownable {
     // WETH
     address public immutable WETH;
 
-    // CAKE tokens created per block.
+    // TAL tokens created per block.
     uint256 public rewardPerBlock;
 
     // Info of each pool.
@@ -53,9 +53,9 @@ contract EthStaking is Ownable {
     uint256 public limitAmount = 10000000000000000000;
     // Total allocation poitns. Must be the sum of all allocation points in all pools.
     uint256 public totalAllocPoint = 0;
-    // The block number when CAKE mining starts.
+    // The block number when TAL mining starts.
     uint256 public startBlock;
-    // The block number when CAKE mining ends.
+    // The block number when TAL mining ends.
     uint256 public bonusEndBlock;
 
     event Deposit(address indexed user, uint256 amount);
