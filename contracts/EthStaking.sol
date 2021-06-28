@@ -1,9 +1,9 @@
 pragma solidity 0.6.12;
 
-import '@pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/access/Ownable.sol';
+import 'taal-swap-lib/contracts/math/SafeMath.sol';
+import 'taal-swap-lib/contracts/token/ERC20/IERC20.sol';
+import 'taal-swap-lib/contracts/token/ERC20/SafeERC20.sol';
+import 'taal-swap-lib/contracts/access/Ownable.sol';
 
 // import "@nomiclabs/buidler/console.sol";
 
@@ -15,7 +15,7 @@ interface IWETH {
 
 contract EthStaking is Ownable {
     using SafeMath for uint256;
-    using SafeBEP20 for IBEP20;
+    using SafeERC20 for IERC20;
 
     // Info of each user.
     struct UserInfo {
@@ -26,14 +26,14 @@ contract EthStaking is Ownable {
 
     // Info of each pool.
     struct PoolInfo {
-        IBEP20 lpToken;           // Address of LP token contract.
+        IERC20 lpToken;           // Address of LP token contract.
         uint256 allocPoint;       // How many allocation points assigned to this pool. CAKEs to distribute per block.
         uint256 lastRewardBlock;  // Last block number that CAKEs distribution occurs.
         uint256 accTaalPerShare; // Accumulated CAKEs per share, times 1e12. See below.
     }
 
     // The REWARD TOKEN
-    IBEP20 public rewardToken;
+    IERC20 public rewardToken;
 
     // adminAddress
     address public adminAddress;
@@ -63,8 +63,8 @@ contract EthStaking is Ownable {
     event EmergencyWithdraw(address indexed user, uint256 amount);
 
     constructor(
-        IBEP20 _lp,
-        IBEP20 _rewardToken,
+        IERC20 _lp,
+        IERC20 _rewardToken,
         uint256 _rewardPerBlock,
         uint256 _startBlock,
         uint256 _bonusEndBlock,

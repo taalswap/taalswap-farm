@@ -1,15 +1,15 @@
 pragma solidity 0.6.12;
 
-import '@pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol';
+import 'taal-swap-lib/contracts/math/SafeMath.sol';
+import 'taal-swap-lib/contracts/token/ERC20/IERC20.sol';
+import 'taal-swap-lib/contracts/token/ERC20/SafeERC20.sol';
 
 // import "@nomiclabs/buidler/console.sol";
 
 // SousChef is the chef of new tokens. He can make yummy food and he is a fair guy as well as MasterChef.
 contract SousChef {
     using SafeMath for uint256;
-    using SafeBEP20 for IBEP20;
+    using SafeERC20 for IERC20;
 
     // Info of each user.
     struct UserInfo {
@@ -37,7 +37,7 @@ contract SousChef {
     }
 
     // The SYRUP TOKEN!
-    IBEP20 public syrup;
+    IERC20 public syrup;
     // rewards created per block.
     uint256 public rewardPerBlock;
 
@@ -59,7 +59,7 @@ contract SousChef {
     event EmergencyWithdraw(address indexed user, uint256 amount);
 
     constructor(
-        IBEP20 _syrup,
+        IERC20 _syrup,
         uint256 _rewardPerBlock,
         uint256 _startBlock,
         uint256 _endBlock

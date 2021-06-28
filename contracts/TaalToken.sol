@@ -1,9 +1,9 @@
 pragma solidity 0.6.12;
 
-import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
+import "taal-swap-lib/contracts/token/ERC20/ERC20.sol";
 
 // TaalToken with Governance.
-contract TaalToken is BEP20('TaalSwap Token', 'TAL') {
+contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
