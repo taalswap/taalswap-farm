@@ -113,10 +113,10 @@ contract MasterChef is Ownable {
     }
 
     function _adjustTaalPerBlock() internal {
-        // TAL emission decreases 0.18% in every single months
-        if (lastAdjust + 30 days >= block.timestamp)
+        // TAL emission decreases in half per 90 days
+        if (lastAdjust + 90 days >= block.timestamp)
         {
-            taalPerBlock = taalPerBlock.mul(82).mul(100);
+            taalPerBlock = taalPerBlock.mul(5).div(10);
             lastAdjust = block.timestamp;
         }
     }

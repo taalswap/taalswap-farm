@@ -1,11 +1,16 @@
 pragma solidity 0.6.12;
 
 import "taal-swap-lib/contracts/token/ERC20/ERC20.sol";
+import "taal-swap-lib/contracts/token/ERC20/IERC20.sol";
 
 // TaalToken with Governance.
 contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
+        require(
+            IERC20(address(this)).totalSupply().add(_amount) <= (100_000_000 * (10 ** uint256(18))),
+            "TAL::mint:: cannot mint more than cap"
+        );
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
