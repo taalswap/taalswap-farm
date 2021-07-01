@@ -81,7 +81,8 @@ contract MasterChef is Ownable {
     // The block number when TAL mining starts.
     uint256 public startBlock;
 
-    uint256 public lastAdjust;
+    uint256 private lastAdjust;
+    uint256 public HALF_LIFE = 90;  // default = 90 days
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -109,16 +110,26 @@ contract MasterChef is Ownable {
         }));
 
         totalAllocPoint = 1000;
-
+        lastAdjust = block.timestamp;
     }
 
     function _adjustTaalPerBlock() internal {
         // TAL emission decreases in half per 90 days
-        if (lastAdjust + 90 days >= block.timestamp)
+        if (lastAdjust + HALF_LIFE * 1 days >= block.timestamp)
         {
             taalPerBlock = taalPerBlock.mul(5).div(10);
             lastAdjust = block.timestamp;
         }
+    }
+
+    // Set HALF_LIFE, should input number in days.
+    function updateHalfLife(uint256 _halving) public onlyOwner {
+        HALF_LIFE = _halving;
+    }
+
+    // Return the time left that TAL rewards cut in half.
+    function getHalving() public view returns (uint256) {
+        return lastAdjust + HALF_LIFE.mul(1 days) - block.timestamp;
     }
 
     function updateMultiplier(uint256 multiplierNumber) public onlyOwner {
