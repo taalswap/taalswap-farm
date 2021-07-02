@@ -82,7 +82,7 @@ contract MasterChef is Ownable {
     uint256 public startBlock;
 
     uint256 private lastAdjust;
-    uint256 public HALF_LIFE = 90;  // default = 90 days
+    uint256 public HALF_LIFE = 180;  // default = 180 days
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
