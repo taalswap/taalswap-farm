@@ -1,6 +1,7 @@
 pragma solidity 0.6.12;
 
-import 'taal-swap-lib/contracts/math/SafeMath.sol';
+//import 'taal-swap-lib/contracts/math/SafeMath.sol';
+import '@openzeppelin/contracts/math/SafeMath.sol';
 import 'taal-swap-lib/contracts/token/ERC20/IERC20.sol';
 import 'taal-swap-lib/contracts/token/ERC20/SafeERC20.sol';
 import 'taal-swap-lib/contracts/access/Ownable.sol';
