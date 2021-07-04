@@ -17,7 +17,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
         _moveDelegates(_delegates[_from], address(0), _amount);
     }
 
-    // The CAKE TOKEN!
+    // The TAL TOKEN!
     TaalToken public taal;
 
     constructor(
@@ -26,7 +26,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
         taal = _taal;
     }
 
-    // Safe taal transfer function, just in case if rounding error causes pool to not have enough CAKEs.
+    // Safe taal transfer function, just in case if rounding error causes pool to not have enough TALs.
     function safeTaalTransfer(address _to, uint256 _amount) public onlyOwner {
         uint256 taalBal = taal.balanceOf(address(this));
         if (_amount > taalBal) {
@@ -138,9 +138,9 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "CAKE::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "CAKE::delegateBySig: invalid nonce");
-        require(now <= expiry, "CAKE::delegateBySig: signature expired");
+        require(signatory != address(0), "TAL::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");
+        require(now <= expiry, "TAL::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -170,7 +170,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "CAKE::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "TAL::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -207,7 +207,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying CAKEs (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying TALs (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -243,7 +243,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "CAKE::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "TAL::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;

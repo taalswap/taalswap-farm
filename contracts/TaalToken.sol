@@ -186,7 +186,7 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying TALS (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying TALs (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
