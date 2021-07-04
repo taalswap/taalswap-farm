@@ -247,7 +247,7 @@ contract TaalVault is Ownable, Pausable {
      * @notice Calculates the expected harvest reward from third party
      * @return Expected reward to collect in TAL
      */
-    function calculateHarvestCakeRewards() external view returns (uint256) {
+    function calculateHarvestTaalRewards() external view returns (uint256) {
         uint256 amount = IMasterChef(masterchef).pendingTaal(0, address(this));
         amount = amount.add(available());
         uint256 currentCallFee = amount.mul(callFee).div(10000);
@@ -259,7 +259,7 @@ contract TaalVault is Ownable, Pausable {
      * @notice Calculates the total pending rewards that can be restaked
      * @return Returns total pending TAL rewards
      */
-    function calculateTotalPendingCakeRewards() external view returns (uint256) {
+    function calculateTotalPendingTaalRewards() external view returns (uint256) {
         uint256 amount = IMasterChef(masterchef).pendingTaal(0, address(this));
         amount = amount.add(available());
 
