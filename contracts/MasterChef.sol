@@ -123,14 +123,14 @@ contract MasterChef is Ownable {
         }
     }
 
-    // Set HALF_LIFE, should input number in days.
-    function updateHalfLife(uint256 _halving) public onlyOwner {
-        HALF_LIFE = _halving;
+    // Set CUT_INTERVAL, should input number in days.
+    function updateCutInterval(uint256 _cutInterval) public onlyOwner {
+        CUT_INTERVAL = _cutInterval;
     }
 
     // Return the time left that TAL rewards cut in half.
-    function getHalving() public view returns (uint256) {
-        return lastAdjust + HALF_LIFE.mul(1 days) - block.timestamp;
+    function getCutting() public view returns (uint256) {
+        return lastAdjust + CUT_INTERVAL.mul(1 days) - block.timestamp;
     }
 
     function updateMultiplier(uint256 multiplierNumber) public onlyOwner {
