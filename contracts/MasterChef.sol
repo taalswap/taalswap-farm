@@ -83,7 +83,7 @@ contract MasterChef is Ownable {
     uint256 public startBlock;
 
     uint256 private lastAdjust;
-    uint256 public HALF_LIFE = 180;  // default = 180 days
+    uint256 public  CUT_INTERVAL = 30;  // default = 30 days
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -115,10 +115,10 @@ contract MasterChef is Ownable {
     }
 
     function _adjustTaalPerBlock() internal {
-        // TAL emission decreases in half per 90 days
-        if (lastAdjust + HALF_LIFE * 1 days >= block.timestamp)
+        // TAL emission decreases in half per 30 days as default
+        if (lastAdjust + CUT_INTERVAL * 1 days <= block.timestamp)
         {
-            taalPerBlock = taalPerBlock.mul(5).div(10);
+            taalPerBlock = taalPerBlock.mul(1).div(10);     // cut up 10%
             lastAdjust = block.timestamp;
         }
     }
