@@ -63,7 +63,7 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
      * Fix suggestion:
      * It is recommended that the voting delegation be transferred correspondingly at the same time as the transfer of tokens.
      */
-    function _transfer(address sender, address recipient, uint256 amount) internal override virtual {
+    function _transfer(address sender, address recipient, uint256 amount) internal override {
         super._transfer(sender, recipient, amount);
         _moveDelegates(_delegates[sender], _delegates[recipient], amount);
     }
