@@ -2,6 +2,10 @@ pragma solidity 0.6.12;
 
 import "taal-swap-lib/contracts/token/ERC20/ERC20.sol";
 import "taal-swap-lib/contracts/token/ERC20/IERC20.sol";
+/**
+ * Fix : [Suggestion] Malleable attack risk
+ */
+import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
 
 // TaalToken with Governance.
 contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
@@ -129,7 +133,11 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
             )
         );
 
-        address signatory = ecrecover(digest, v, r, s);
+        /**
+         * Fix : [Suggestion] Malleable attack risk
+         */
+        // address recoveredAddress = ecrecover(digest, v, r, s);
+        address recoveredAddress = recover(digest, v, r, s);
         require(signatory != address(0), "TAL::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");
         require(now <= expiry, "TAL::delegateBySig: signature expired");
