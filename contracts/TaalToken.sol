@@ -49,7 +49,7 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
     /// @notice A record of states for signing / validating signatures
     mapping (address => uint) public nonces;
 
-      /// @notice An event thats emitted when an account changes its delegate
+    /// @notice An event thats emitted when an account changes its delegate
     event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
 
     /// @notice An event thats emitted when a delegate account's vote balance changes
@@ -133,10 +133,8 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
             )
         );
 
-        /**
-         * Fix : [Suggestion] Malleable attack risk
-         */
-        // address recoveredAddress = ecrecover(digest, v, r, s);
+        //// Fix : [Suggestion] Malleable attack risk
+        //// address recoveredAddress = ecrecover(digest, v, r, s);
         address recoveredAddress = recover(digest, v, r, s);
         require(signatory != address(0), "TAL::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");

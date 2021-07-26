@@ -104,9 +104,7 @@ contract TaalVault is Ownable, Pausable {
     function deposit(uint256 _amount) external whenNotPaused notContract {
         require(_amount > 0, "Nothing to deposit");
 
-        /**
-         * Fix: [Suggestion] The deflationary token docking issue
-         */
+         //// Fix: [Suggestion] The deflationary token docking issue
         uint256 pool = balanceOf();
         token.safeTransferFrom(msg.sender, address(this), _amount);
         uint256 _amountReceived = balanceOf().sub(pool);

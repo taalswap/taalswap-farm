@@ -153,10 +153,8 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
             )
         );
 
-        /**
-         * Fix : [Suggestion] Malleable attack risk
-         */
-        // address recoveredAddress = ecrecover(digest, v, r, s);
+        //// Fix : [Suggestion] Malleable attack risk
+        //// address recoveredAddress = ecrecover(digest, v, r, s);
         address recoveredAddress = recover(digest, v, r, s);
         require(signatory != address(0), "TAL::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");
