@@ -5,7 +5,7 @@ import "./TaalToken.sol";
 /**
  * Fix : [Suggestion] Malleable attack risk
  */
-import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
+import './libs/ECDCA.sol';
 
 // SyrupBar with Governance.
 contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {

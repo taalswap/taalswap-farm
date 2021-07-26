@@ -5,7 +5,7 @@ import "taal-swap-lib/contracts/token/ERC20/IERC20.sol";
 /**
  * Fix : [Suggestion] Malleable attack risk
  */
-import '@openzeppelin/contracts/utils/cryptography/ECDSA.sol';
+import './libs/ECDCA.sol';
 
 // TaalToken with Governance.
 contract TaalToken is ERC20('TaalSwap Token', 'TAL') {

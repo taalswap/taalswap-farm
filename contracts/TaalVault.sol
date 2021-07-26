@@ -168,7 +168,7 @@ contract TaalVault is Ownable, Pausable {
         require(_admin != address(0), "Cannot be zero address");
         admin = _admin;
 
-        emit SetAdmin(address indexed sender);
+        emit SetAdmin(admin);
     }
 
     /**
@@ -179,7 +179,7 @@ contract TaalVault is Ownable, Pausable {
         require(_treasury != address(0), "Cannot be zero address");
         treasury = _treasury;
 
-        emit SetTreasury(address indexed _treasury);
+        emit SetTreasury(treasury);
     }
 
     /**
@@ -190,7 +190,7 @@ contract TaalVault is Ownable, Pausable {
         require(_performanceFee <= MAX_PERFORMANCE_FEE, "performanceFee cannot be more than MAX_PERFORMANCE_FEE");
         performanceFee = _performanceFee;
 
-        emit SetPerformanceFee(uint256 _performanceFee);
+        emit SetPerformanceFee(performanceFee);
     }
 
     /**
@@ -201,7 +201,7 @@ contract TaalVault is Ownable, Pausable {
         require(_callFee <= MAX_CALL_FEE, "callFee cannot be more than MAX_CALL_FEE");
         callFee = _callFee;
 
-        emit SetCallFee(uint256 _callFee);
+        emit SetCallFee(callFee);
     }
 
     /**
@@ -212,7 +212,7 @@ contract TaalVault is Ownable, Pausable {
         require(_withdrawFee <= MAX_WITHDRAW_FEE, "withdrawFee cannot be more than MAX_WITHDRAW_FEE");
         withdrawFee = _withdrawFee;
 
-        emit SetWithdrawFee(uint256 _withdrawFee);
+        emit SetWithdrawFee(withdrawFee);
     }
 
     /**
@@ -226,7 +226,7 @@ contract TaalVault is Ownable, Pausable {
         );
         withdrawFeePeriod = _withdrawFeePeriod;
 
-        emit SetWithdrawFeePeriod(uint256 _withdrawFeePeriod)
+        emit SetWithdrawFeePeriod(withdrawFeePeriod);
     }
 
     /**
