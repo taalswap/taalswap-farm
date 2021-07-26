@@ -104,13 +104,18 @@ contract TaalVault is Ownable, Pausable {
     function deposit(uint256 _amount) external whenNotPaused notContract {
         require(_amount > 0, "Nothing to deposit");
 
+        /**
+         * Fix: [Suggestion] The deflationary token docking issue
+         */
         uint256 pool = balanceOf();
         token.safeTransferFrom(msg.sender, address(this), _amount);
+        uint256 _amountReceived = balanceOf().sub(pool);
+
         uint256 currentShares = 0;
         if (totalShares != 0) {
-            currentShares = (_amount.mul(totalShares)).div(pool);
+            currentShares = (_amountReceived.mul(totalShares)).div(pool);
         } else {
-            currentShares = _amount;
+            currentShares = _amountReceived;
         }
         UserInfo storage user = userInfo[msg.sender];
 
@@ -124,7 +129,7 @@ contract TaalVault is Ownable, Pausable {
 
         _earn();
 
-        emit Deposit(msg.sender, _amount, currentShares, block.timestamp);
+        emit Deposit(msg.sender, _amountReceived, currentShares, block.timestamp);
     }
 
     /**
