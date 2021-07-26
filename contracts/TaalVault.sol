@@ -209,8 +209,11 @@ contract TaalVault is Ownable, Pausable {
     /**
      * @notice Withdraws from MasterChef to Vault without caring about rewards.
      * @dev EMERGENCY ONLY. Only callable by the contract admin.
+     *
+     * Fix : [Low] Emergency withdrawal issue
      */
     function emergencyWithdraw() external onlyAdmin {
+        _pause();
         IMasterChef(masterchef).emergencyWithdraw(0);
     }
 
