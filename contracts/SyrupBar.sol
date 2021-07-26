@@ -5,7 +5,7 @@ import "./TaalToken.sol";
 /**
  * Fix : [Suggestion] Malleable attack risk
  */
-import './libs/ECDCA.sol';
+import './libs/ECDSA.sol';
 
 // SyrupBar with Governance.
 contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
@@ -155,7 +155,7 @@ contract SyrupBar is ERC20('SyrupBar Token', 'SYRUP') {
 
         //// Fix : [Suggestion] Malleable attack risk
         //// address recoveredAddress = ecrecover(digest, v, r, s);
-        address recoveredAddress = recover(digest, v, r, s);
+        address recoveredAddress = ECDSA.recover(digest, v, r, s);
         require(signatory != address(0), "TAL::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");
         require(now <= expiry, "TAL::delegateBySig: signature expired");
