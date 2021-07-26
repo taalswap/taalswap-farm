@@ -134,8 +134,8 @@ contract TaalToken is ERC20('TaalSwap Token', 'TAL') {
         );
 
         //// Fix : [Suggestion] Malleable attack risk
-        //// address recoveredAddress = ecrecover(digest, v, r, s);
-        address recoveredAddress = ECDSA.recover(digest, v, r, s);
+        //// address signatory = ecrecover(digest, v, r, s);
+        address signatory = ECDSA.recover(digest, v, r, s);
         require(signatory != address(0), "TAL::delegateBySig: invalid signature");
         require(nonce == nonces[signatory]++, "TAL::delegateBySig: invalid nonce");
         require(now <= expiry, "TAL::delegateBySig: signature expired");
