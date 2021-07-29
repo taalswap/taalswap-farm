@@ -145,9 +145,10 @@ contract MasterChef is Ownable {
     // Add a new lp to the pool. Can only be called by the owner.
     // XXX DO NOT add the same LP token more than once. Rewards will be messed up if you do.
     function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner {
-        if (_withUpdate) {
+        //// Fix: N9 [Suggestion] The change of LP pool weights affects users' income
+        // if (_withUpdate) {
             massUpdatePools();
-        }
+        // }
         uint256 lastRewardBlock = block.number > startBlock ? block.number : startBlock;
         totalAllocPoint = totalAllocPoint.add(_allocPoint);
         poolInfo.push(PoolInfo({
@@ -161,9 +162,10 @@ contract MasterChef is Ownable {
 
     // Update the given pool's TAL allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
-        if (_withUpdate) {
+        //// Fix: N9 [Suggestion] The change of LP pool weights affects users' income
+        // if (_withUpdate) {
             massUpdatePools();
-        }
+        // }
         uint256 prevAllocPoint = poolInfo[_pid].allocPoint;
         poolInfo[_pid].allocPoint = _allocPoint;
         if (prevAllocPoint != _allocPoint) {
