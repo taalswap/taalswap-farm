@@ -58,7 +58,8 @@ contract LotteryRewardPool is Ownable {
     }
 
     // EMERGENCY ONLY.
-    function emergencyWithdraw(IERC20 _token, uint256 _amount) external onlyOwner {
+    //// Fix : N11 [Suggestion] Redundant code
+    function emergencyWithdraw(uint256 _amount) external onlyOwner {
         taal.safeTransfer(address(msg.sender), _amount);
         emit EmergencyWithdraw(msg.sender, _amount);
     }
