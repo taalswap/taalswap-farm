@@ -129,8 +129,9 @@ contract MasterChef is Ownable {
     }
 
     // Return the time left that TAL rewards cut in half.
+    //// Fix : N13 [Low] Overflow issue
     function getCutting() public view returns (uint256) {
-        return lastAdjust + CUT_INTERVAL.mul(1 days) - block.timestamp;
+        return lastAdjust.add(CUT_INTERVAL.mul(1 days)).sub(block.timestamp);
     }
 
     function updateMultiplier(uint256 multiplierNumber) public onlyOwner {
