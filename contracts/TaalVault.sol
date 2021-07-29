@@ -104,10 +104,11 @@ contract TaalVault is Ownable, Pausable {
     function deposit(uint256 _amount) external whenNotPaused notContract {
         require(_amount > 0, "Nothing to deposit");
 
-         //// Fix: [Suggestion] The deflationary token docking issue
-        uint256 pool = balanceOf();
+        //// Fix: N14 [High] Wrong calculation of stake amount
+        (uint256 before, ) = IMasterChef(masterchef).userInfo(0, address(this));
         token.safeTransferFrom(msg.sender, address(this), _amount);
-        uint256 _amountReceived = balanceOf().sub(pool);
+        (uint256 after, ) = IMasterChef(masterchef).userInfo(0, address(this));
+        uint256 _amountReceived = after.sub(before);
 
         uint256 currentShares = 0;
         if (totalShares != 0) {
