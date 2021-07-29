@@ -104,11 +104,13 @@ contract TaalVault is Ownable, Pausable {
     function deposit(uint256 _amount) external whenNotPaused notContract {
         require(_amount > 0, "Nothing to deposit");
 
+        uint256 pool = balanceOf();
+
         //// Fix: N14 [High] Wrong calculation of stake amount
         uint256 _before = token.balanceOf(address(this));
         token.safeTransferFrom(msg.sender, address(this), _amount);
         uint256 _after = token.balanceOf(address(this));
-        _amountReceived = _after.sub(_before);
+        uint256 _amountReceived = _after.sub(_before);
 
         uint256 currentShares = 0;
         if (totalShares != 0) {
