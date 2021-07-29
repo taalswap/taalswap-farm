@@ -105,10 +105,10 @@ contract TaalVault is Ownable, Pausable {
         require(_amount > 0, "Nothing to deposit");
 
         //// Fix: N14 [High] Wrong calculation of stake amount
-        (uint256 before, ) = IMasterChef(masterchef).userInfo(0, address(this));
+        uint256 _before = token.balanceOf(address(this));
         token.safeTransferFrom(msg.sender, address(this), _amount);
-        (uint256 after, ) = IMasterChef(masterchef).userInfo(0, address(this));
-        uint256 _amountReceived = after.sub(before);
+        uint256 _after = token.balanceOf(address(this));
+        _amountReceived = _after.sub(_before);
 
         uint256 currentShares = 0;
         if (totalShares != 0) {
