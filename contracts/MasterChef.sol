@@ -146,7 +146,8 @@ contract MasterChef is Ownable {
     // XXX DO NOT add the same LP token more than once. Rewards will be messed up if you do.
     function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner {
         //// Fix: N10 [Suggestion] No check for the existence of the token
-        require(Address.isContract(_lpToken), "Address: lpToken should be exist");
+        address _lpContract = address(_lpToken);
+        require(Address.isContract(_lpContract), "Address: lpToken should be exist");
 
         //// Fix: N9 [Suggestion] The change of LP pool weights affects users' income
         // if (_withUpdate) {
