@@ -75,6 +75,10 @@ contract MasterChef is Ownable {
 
     // Info of each pool.
     PoolInfo[] public poolInfo;
+    // Duplicate pool check.
+    //// Fix: N10 [Suggestion] No check for the existence of the token
+    mapping (address => bool) internal _poolExist;
+
     // Info of each user that stakes LP tokens.
     mapping (uint256 => mapping (address => UserInfo)) public userInfo;
     // Total allocation points. Must be the sum of all allocation points in all pools.
@@ -148,6 +152,7 @@ contract MasterChef is Ownable {
         //// Fix: N10 [Suggestion] No check for the existence of the token
         address _lpContract = address(_lpToken);
         require(Address.isContract(_lpContract), "Address: lpToken should be exist");
+        require(!_poolExist[_lpContract]);
 
         //// Fix: N9 [Suggestion] The change of LP pool weights affects users' income
         // if (_withUpdate) {
@@ -161,6 +166,8 @@ contract MasterChef is Ownable {
             lastRewardBlock: lastRewardBlock,
             accTaalPerShare: 0
         }));
+        //// Fix: N10 [Suggestion] No check for the existence of the token
+        _poolExist[_lpContract] = true;
         updateStakingPool();
     }
 
