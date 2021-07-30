@@ -152,7 +152,7 @@ contract MasterChef is Ownable {
         //// Fix: N10 [Suggestion] No check for the existence of the token
         address _lpContract = address(_lpToken);
         require(Address.isContract(_lpContract), "Address: lpToken should be exist");
-        require(!_poolExist[_lpContract]);
+        require(!_poolExist[_lpContract], "Add: LP Token already been added");
 
         //// Fix: N9 [Suggestion] The change of LP pool weights affects users' income
         // if (_withUpdate) {
