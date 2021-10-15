@@ -1,4 +1,4 @@
-import '@openzeppelin/contracts/utils/Context.sol';
+//import '@openzeppelin/contracts/utils/Context.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
@@ -76,6 +76,7 @@ contract TaalVault is Ownable, Pausable {
         treasury = _treasury;
 
         // Infinite approve
+        // Error on Klaytn why?
         IERC20(_token).safeApprove(address(_masterchef), uint256(-1));
     }
 
