@@ -16,7 +16,7 @@ contract WTAL is Ownable {
     event  Deposit(uint _amount);
     event  Withdraw(uint _amount);
     event  WithdrawAll(uint _amount);
-    event  SetBridge(address indexed _bridge);
+    event  SetBridge(address indexed _oldBridge, address indexed _bridge);
 
     address public immutable TAL;
     address public bridgeContract;
@@ -58,8 +58,11 @@ contract WTAL is Ownable {
     }
 
     function setBridge(address _bridge) public onlyOwner {
+        require(address(_bridge) != address(0), "Invalid bridge contract address");
+        address _oldBridge = bridgeContract;
+        IERC20(TAL).approve(bridgeContract, 0);
         bridgeContract = _bridge;
         IERC20(TAL).approve(bridgeContract, 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff);
-        emit SetBridge(_bridge);
+        emit SetBridge(_oldBridge, _bridge);
     }
 }
