@@ -54,7 +54,9 @@ contract WTAL is Ownable {
     function setBridge(address _bridge) public onlyOwner {
         require(address(_bridge) != address(0), "Invalid bridge contract address");
         address _oldBridge = bridgeContract;
-        IERC20(TAL).approve(bridgeContract, 0);
+        if (bridgeContract != address(0)) {
+            IERC20(TAL).approve(bridgeContract, 0);
+        }
         bridgeContract = _bridge;
         IERC20(TAL).approve(bridgeContract, 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff);
         emit SetBridge(_oldBridge, _bridge);
